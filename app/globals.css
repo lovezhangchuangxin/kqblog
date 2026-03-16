@@ -1,64 +1,48 @@
 @import "tailwindcss";
 
-/* 基础主题 - Light */
+/* 默认主题 - 霜华 (神里绫华 - 浅色) */
+/* 设计理念：雪舞冰心，樱吹雪落 */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  --secondary: 210 40% 96.1%;
-  --accent: 210 40% 96.1%;
-  --muted: 210 40% 96.1%;
-  --border: 214.3 31.8% 91.4%;
-  --code-bg: 220 13% 96%;
+  --background: 200 30% 95%;          /* 冰雪白背景 */
+  --foreground: 210 40% 15%;          /* 深蓝灰文字 */
+  --primary: 200 70% 55%;             /* 冰蓝主色 */
+  --primary-glow: 200 90% 70%;        /* 霜蓝高亮 */
+  --secondary: 200 20% 90%;           /* 淡蓝次要 */
+  --accent: 340 70% 75%;              /* 樱花粉点缀 */
+  --accent-secondary: 190 60% 50%;    /* 冰青色点缀 */
+  --muted: 200 15% 80%;               /* 柔蓝灰 */
+  --border: 200 30% 85%;              /* 淡蓝边框 */
+  --code-bg: 200 20% 92%;             /* 代码块浅蓝 */
 }
 
-/* Dark 主题 */
-[data-theme="dark"] {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%;
-  --secondary: 217.2 32.6% 17.5%;
-  --accent: 217.2 32.6% 17.5%;
-  --muted: 217.2 32.6% 17.5%;
-  --border: 217.2 32.6% 17.5%;
-  --code-bg: 220 13% 15%;
+/* 紫电主题 - 刻晴 (Keqing - Electro - 深色) */
+/* 设计理念：雷光紫霓，电闪星驰 */
+[data-theme="zidian"] {
+  --background: 265 50% 6%;           /* 深紫黑背景 */
+  --foreground: 265 20% 95%;          /* 淡紫白文字 */
+  --primary: 265 80% 60%;             /* 刻晴标志紫 */
+  --primary-glow: 265 100% 70%;       /* 电光紫高亮 */
+  --secondary: 265 30% 20%;           /* 暗紫次要 */
+  --accent: 200 100% 65%;             /* 电光蓝点缀 */
+  --accent-secondary: 280 70% 55%;    /* 幻紫粉点缀 */
+  --muted: 265 15% 25%;               /* 柔紫灰 */
+  --border: 265 40% 20%;              /* 紫边框 */
+  --code-bg: 265 45% 10%;             /* 代码块深紫 */
 }
 
-/* Ocean 主题 */
-[data-theme="ocean"] {
-  --background: 198 50% 8%;
-  --foreground: 198 20% 95%;
-  --primary: 198 80% 50%;
-  --secondary: 198 30% 20%;
-  --accent: 180 60% 45%;
-  --muted: 198 20% 30%;
-  --border: 198 30% 25%;
-  --code-bg: 198 40% 12%;
-}
-
-/* Forest 主题 */
-[data-theme="forest"] {
-  --background: 140 30% 8%;
-  --foreground: 140 20% 95%;
-  --primary: 140 60% 45%;
-  --secondary: 140 25% 18%;
-  --accent: 60 70% 50%;
-  --muted: 140 15% 25%;
-  --border: 140 20% 20%;
-  --code-bg: 140 35% 12%;
-}
-
-/* 系统偏好 - Dark */
+/* 系统偏好 - 深色时使用紫电主题 */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --secondary: 217.2 32.6% 17.5%;
-    --accent: 217.2 32.6% 17.5%;
-    --muted: 217.2 32.6% 17.5%;
-    --border: 217.2 32.6% 17.5%;
-    --code-bg: 220 13% 15%;
+    --background: 265 50% 6%;
+    --foreground: 265 20% 95%;
+    --primary: 265 80% 60%;
+    --primary-glow: 265 100% 70%;
+    --secondary: 265 30% 20%;
+    --accent: 200 100% 65%;
+    --accent-secondary: 280 70% 55%;
+    --muted: 265 15% 25%;
+    --border: 265 40% 20%;
+    --code-bg: 265 45% 10%;
   }
 }
 
@@ -67,10 +51,13 @@
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-primary: hsl(var(--primary));
+  --color-primary-glow: hsl(var(--primary-glow));
   --color-secondary: hsl(var(--secondary));
   --color-accent: hsl(var(--accent));
+  --color-accent-secondary: hsl(var(--accent-secondary));
   --color-muted: hsl(var(--muted));
   --color-border: hsl(var(--border));
+  --color-code-bg: hsl(var(--code-bg));
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -80,7 +67,7 @@ body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-sans, system-ui, sans-serif);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* 代码块样式 */
@@ -109,4 +96,52 @@ a:hover {
 /* 选中文本样式 */
 ::selection {
   background: hsl(var(--primary) / 0.2);
+}
+
+/* ===== 霜华主题特殊样式（默认浅色） ===== */
+:root a:hover,
+[data-theme="shuanghua"] a:hover {
+  text-shadow: 0 0 6px hsl(200 70% 55% / 0.4);
+}
+
+:root .prose h1,
+:root .prose h2,
+:root .prose h3,
+[data-theme="shuanghua"] .prose h1,
+[data-theme="shuanghua"] .prose h2,
+[data-theme="shuanghua"] .prose h3 {
+  background: linear-gradient(135deg, hsl(200 70% 55%), hsl(340 70% 75%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+:root article,
+[data-theme="shuanghua"] article {
+  border-left: 3px solid hsl(200 70% 55%);
+  box-shadow: inset 0 0 30px hsl(200 30% 90% / 0.5);
+}
+
+:root .prose a[href^="/tag/"],
+[data-theme="shuanghua"] .prose a[href^="/tag/"] {
+  background: linear-gradient(135deg, hsl(200 20% 92%), hsl(340 30% 95%));
+}
+
+/* ===== 紫电主题特殊样式（深色） ===== */
+[data-theme="zidian"] a:hover {
+  text-shadow: 0 0 8px hsl(265 80% 60% / 0.5);
+}
+
+[data-theme="zidian"] .prose h1,
+[data-theme="zidian"] .prose h2,
+[data-theme="zidian"] .prose h3 {
+  background: linear-gradient(135deg, hsl(265 80% 65%), hsl(200 100% 65%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="zidian"] article {
+  border-left: 3px solid hsl(265 80% 60%);
+  box-shadow: inset 0 0 30px hsl(265 50% 10% / 0.3);
 }

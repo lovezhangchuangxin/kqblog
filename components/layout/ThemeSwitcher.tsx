@@ -4,11 +4,8 @@ import { useTheme } from "next-themes";
 import { useSyncExternalStore, useCallback, useState, useRef, useEffect } from "react";
 
 const themes = [
-  { name: "light", label: "浅色" },
-  { name: "dark", label: "深色" },
-  { name: "ocean", label: "海洋" },
-  { name: "forest", label: "森林" },
-  { name: "system", label: "跟随系统" },
+  { name: "zidian", label: "紫电 · 刻晴" },
+  { name: "shuanghua", label: "霜华 · 绫华" },
 ] as const;
 
 function useMounted() {
