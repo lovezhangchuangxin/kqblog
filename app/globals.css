@@ -1,26 +1,112 @@
 @import "tailwindcss";
 
+/* 基础主题 - Light */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --secondary: 210 40% 96.1%;
+  --accent: 210 40% 96.1%;
+  --muted: 210 40% 96.1%;
+  --border: 214.3 31.8% 91.4%;
+  --code-bg: 220 13% 96%;
 }
 
+/* Dark 主题 */
+[data-theme="dark"] {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --secondary: 217.2 32.6% 17.5%;
+  --accent: 217.2 32.6% 17.5%;
+  --muted: 217.2 32.6% 17.5%;
+  --border: 217.2 32.6% 17.5%;
+  --code-bg: 220 13% 15%;
+}
+
+/* Ocean 主题 */
+[data-theme="ocean"] {
+  --background: 198 50% 8%;
+  --foreground: 198 20% 95%;
+  --primary: 198 80% 50%;
+  --secondary: 198 30% 20%;
+  --accent: 180 60% 45%;
+  --muted: 198 20% 30%;
+  --border: 198 30% 25%;
+  --code-bg: 198 40% 12%;
+}
+
+/* Forest 主题 */
+[data-theme="forest"] {
+  --background: 140 30% 8%;
+  --foreground: 140 20% 95%;
+  --primary: 140 60% 45%;
+  --secondary: 140 25% 18%;
+  --accent: 60 70% 50%;
+  --muted: 140 15% 25%;
+  --border: 140 20% 20%;
+  --code-bg: 140 35% 12%;
+}
+
+/* 系统偏好 - Dark */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --secondary: 217.2 32.6% 17.5%;
+    --accent: 217.2 32.6% 17.5%;
+    --muted: 217.2 32.6% 17.5%;
+    --border: 217.2 32.6% 17.5%;
+    --code-bg: 220 13% 15%;
+  }
+}
+
+/* Tailwind v4 主题集成 */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-secondary: hsl(var(--secondary));
+  --color-accent: hsl(var(--accent));
+  --color-muted: hsl(var(--muted));
+  --color-border: hsl(var(--border));
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 基础样式 */
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans, system-ui, sans-serif);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 代码块样式 */
+pre {
+  background: hsl(var(--code-bg));
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+code {
+  font-family: var(--font-mono, ui-monospace, monospace);
+}
+
+/* 链接样式 */
+a {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* 选中文本样式 */
+::selection {
+  background: hsl(var(--primary) / 0.2);
 }
