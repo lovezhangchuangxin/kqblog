@@ -1,6 +1,172 @@
 @import "tailwindcss";
 
-/* 默认主题 - 霜华 (神里绫华 - 浅色) */
+/* ============================================
+   全局动画系统 - 协调优化版
+   设计原则：
+   - 入场动画使用 ease-out，让元素"落地"
+   - 持续动画使用 ease-in-out，保持流畅
+   - 交互动画使用 cubic-bezier，增加质感
+   - 统一时间基准：快 150ms / 标准 300ms / 慢 500ms
+   ============================================ */
+
+/* 入场动画 - 淡入 */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 入场动画 - 从下方淡入（优化版） */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 入场动画 - 从上方淡入 */
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 入场动画 - 从左侧滑入 */
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 入场动画 - 从右侧滑入 */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 入场动画 - 缩放淡入 */
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 持续动画 - 轻柔浮动 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+}
+
+/* 持续动画 - 柔和发光脉冲 */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px hsl(var(--primary) / 0.2);
+  }
+  50% {
+    box-shadow: 0 0 24px hsl(var(--primary) / 0.35);
+  }
+}
+
+/* 持续动画 - 渐变流动（更慢更柔和） */
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 加载动画 - 骨架屏闪烁 */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* 装饰动画 - 慢速旋转 */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 装饰动画 - 微弹跳 */
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* 交互动画 - 下划线展开 */
+@keyframes underline-expand {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* 交互动画 - 涟漪扩散 */
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   默认主题 - 霜华 (神里绫华 - 浅色)
+   ============================================ */
 /* 设计理念：雪舞冰心，樱吹雪落 */
 :root {
   --background: 200 30% 95%;          /* 冰雪白背景 */
@@ -60,6 +226,27 @@
   --color-code-bg: hsl(var(--code-bg));
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* 动画配置 - 协调优化版 */
+  /* 入场动画：使用 ease-out 让元素"落地" */
+  --animate-fade-in: fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in-up: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in-down: fade-in-down 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-in-left: slide-in-left 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-in-right: slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-scale-in: scale-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  /* 持续动画：使用 ease-in-out 保持流畅 */
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-gradient-flow: gradient-flow 12s ease infinite;
+  --animate-shimmer: shimmer 2.5s linear infinite;
+  --animate-spin-slow: spin-slow 25s linear infinite;
+  --animate-bounce-subtle: bounce-subtle 2.5s ease-in-out infinite;
+
+  /* 交互动画：快速响应 */
+  --animate-underline-expand: underline-expand 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  --animate-ripple: ripple 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 基础样式 */
@@ -144,4 +331,190 @@ a:hover {
 [data-theme="zidian"] article {
   border-left: 3px solid hsl(265 80% 60%);
   box-shadow: inset 0 0 30px hsl(265 50% 10% / 0.3);
+}
+
+/* ============================================
+   动画工具类
+   ============================================ */
+
+/* 入场动画 - 带延迟 */
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+.animate-delay-500 { animation-delay: 500ms; }
+
+/* 初始隐藏（配合入场动画使用） */
+.animate-init-hidden {
+  opacity: 0;
+}
+
+/* 卡片悬停效果 */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px hsl(var(--primary) / 0.15);
+}
+
+/* 链接下划线动画 */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: hsl(var(--primary));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* 渐变文字 */
+.text-gradient {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 渐变边框 */
+.border-gradient {
+  position: relative;
+  background: hsl(var(--background));
+}
+
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* 玻璃效果 */
+.glass {
+  background: hsl(var(--background) / 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* 发光效果 */
+.glow {
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.5);
+}
+
+/* 按钮渐变动画 */
+.btn-gradient {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  background-size: 200% 200%;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background-position: 100% 0;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px hsl(var(--primary) / 0.5);
+}
+
+/* 骨架屏动画 */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--secondary)) 25%,
+    hsl(var(--muted)) 50%,
+    hsl(var(--secondary)) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--secondary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 焦点样式 */
+:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* ============================================
+   减少动画偏好支持
+   尊重用户的 prefers-reduced-motion 设置
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-fade-in-down,
+  .animate-slide-in-left,
+  .animate-slide-in-right,
+  .animate-scale-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .card-hover:hover {
+    transform: none !important;
+  }
+
+  .float,
+  .pulse-glow,
+  .gradient-flow,
+  .shimmer,
+  .spin-slow,
+  .bounce-subtle {
+    animation: none !important;
+  }
 }
