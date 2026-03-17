@@ -9,6 +9,7 @@ interface MDXProps {
 /**
  * MDX 渲染器组件
  * 使用 @shikijs/rehype 进行代码高亮
+ * 支持双主题：浅色用 github-light，深色用 github-dark
  * RSC 版本的 MDXRemote 是 async 组件
  */
 export async function MDXRenderer({ content }: MDXProps) {
@@ -20,7 +21,10 @@ export async function MDXRenderer({ content }: MDXProps) {
         mdxOptions: {
           rehypePlugins: [
             [rehypeShiki, {
-              theme: 'github-dark',
+              themes: {
+                light: 'github-light',
+                dark: 'github-dark',
+              },
               defaultLanguage: 'text',
             }],
           ],

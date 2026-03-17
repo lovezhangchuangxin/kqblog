@@ -16,6 +16,8 @@ interface CodeProps {
 
 interface PreProps {
   children: ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 // 标题组件
@@ -76,10 +78,13 @@ export function a({ href, children }: LinkProps) {
   );
 }
 
-// 代码块
-export function pre({ children }: PreProps) {
+// 代码块 - Shiki rehype 插件会传递 className 和 style
+export function pre({ children, className, style }: PreProps) {
   return (
-    <pre className="my-4 p-4 rounded-lg overflow-x-auto bg-[hsl(var(--code-bg))] border border-border">
+    <pre
+      className={`${className || ''} my-4 overflow-x-auto rounded-lg border border-border/50`}
+      style={style}
+    >
       {children}
     </pre>
   );
