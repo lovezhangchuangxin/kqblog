@@ -1,5 +1,6 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypeShiki from '@shikijs/rehype';
+import remarkGfm from 'remark-gfm';
 import { MDXComponents } from '@/components/blog/MDXComponents';
 
 interface MDXProps {
@@ -19,6 +20,7 @@ export async function MDXRenderer({ content }: MDXProps) {
       components={MDXComponents}
       options={{
         mdxOptions: {
+          remarkPlugins: [remarkGfm],
           rehypePlugins: [
             [rehypeShiki, {
               themes: {

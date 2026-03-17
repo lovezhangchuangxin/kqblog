@@ -148,6 +148,57 @@ export function hr() {
   );
 }
 
+// 表格
+export function table({ children }: HeadingProps) {
+  return (
+    <div className="my-6 overflow-x-auto">
+      <table className="w-full border-collapse border border-border rounded-lg">
+        {children}
+      </table>
+    </div>
+  );
+}
+
+export function thead({ children }: HeadingProps) {
+  return (
+    <thead className="bg-muted/50">
+      {children}
+    </thead>
+  );
+}
+
+export function tbody({ children }: HeadingProps) {
+  return (
+    <tbody className="divide-y divide-border">
+      {children}
+    </tbody>
+  );
+}
+
+export function tr({ children }: HeadingProps) {
+  return (
+    <tr className="border-b border-border">
+      {children}
+    </tr>
+  );
+}
+
+export function th({ children }: HeadingProps) {
+  return (
+    <th className="px-4 py-3 text-left font-semibold text-foreground border border-border">
+      {children}
+    </th>
+  );
+}
+
+export function td({ children }: HeadingProps) {
+  return (
+    <td className="px-4 py-3 text-foreground border border-border">
+      {children}
+    </td>
+  );
+}
+
 // 图片
 interface ImgProps {
   src: string;
@@ -181,4 +232,10 @@ export const MDXComponents = {
   blockquote,
   hr,
   img,
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td,
 };
