@@ -1,10 +1,10 @@
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import { getPostBySlug, getAllPosts } from '@/lib/content';
-import { generatePostMetadata, generateJsonLd } from '@/lib/metadata';
-import { MDXRenderer } from '@/lib/mdx';
-import { Comments } from '@/components/blog/Comments';
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { getPostBySlug, getAllPosts } from "@/lib/content";
+import { generatePostMetadata, generateJsonLd } from "@/lib/metadata";
+import { MDXRenderer } from "@/lib/mdx";
+import { Comments } from "@/components/blog/Comments";
 
 interface PageProps {
   params: Promise<{
@@ -21,13 +21,15 @@ export async function generateStaticParams() {
 }
 
 // 生成元数据
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
   if (!post) {
     return {
-      title: '文章未找到',
+      title: "文章未找到",
     };
   }
 
@@ -67,7 +69,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       <article className="min-h-screen bg-background">
         {/* 文章头部 */}
-        <header className="relative py-16 px-4 overflow-hidden">
+        <header className="relative py-12 px-4 overflow-hidden">
           {/* 装饰背景 */}
           <div
             className="absolute inset-0 pointer-events-none"
@@ -87,9 +89,18 @@ export default async function BlogPostPage({ params }: PageProps) {
                          hover:text-primary transition-colors duration-200 mb-8
                          animate-fade-in-up"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
               </svg>
               返回文章列表
             </Link>
@@ -103,9 +114,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             </h1>
 
             {/* 描述 */}
-            <p
-              className="text-lg text-muted-foreground mb-8 animate-fade-in-up animate-delay-200"
-            >
+            <p className="text-lg text-muted-foreground mb-8 animate-fade-in-up animate-delay-200">
               {post.frontmatter.description}
             </p>
 
@@ -119,21 +128,39 @@ export default async function BlogPostPage({ params }: PageProps) {
                 className="flex items-center gap-2 px-3 py-1.5 rounded-lg
                            bg-secondary/50"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
                 </svg>
-                {new Date(post.frontmatter.date).toLocaleDateString('zh-CN', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
+                {new Date(post.frontmatter.date).toLocaleDateString("zh-CN", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
                 })}
               </time>
 
               <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-secondary/50">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
                 {post.readingTime} 分钟阅读
               </span>
@@ -142,7 +169,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         </header>
 
         {/* 文章内容 */}
-        <div className="max-w-3xl mx-auto px-4 pb-16">
+        <div className="max-w-3xl mx-auto pb-16">
           <div
             className="prose prose-neutral dark:prose-invert max-w-none
                        prose-headings:text-gradient prose-headings:font-bold
