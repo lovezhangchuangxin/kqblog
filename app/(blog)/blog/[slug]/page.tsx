@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getPostBySlug, getAllPosts } from '@/lib/content';
 import { generatePostMetadata, generateJsonLd } from '@/lib/metadata';
 import { MDXRenderer } from '@/lib/mdx';
+import { Comments } from '@/components/blog/Comments';
 
 interface PageProps {
   params: Promise<{
@@ -153,6 +154,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                        animate-fade-in-up animate-delay-400"
           >
             <MDXRenderer content={post.content} />
+          </div>
+
+          {/* 评论系统 */}
+          <div className="animate-fade-in-up animate-delay-500">
+            <Comments slug={post.slug} />
           </div>
 
           {/* 标签 */}
