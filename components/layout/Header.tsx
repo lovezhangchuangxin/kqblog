@@ -38,10 +38,8 @@ export function Header() {
     };
   }, [isMenuOpen]);
 
-  // 路由变化时关闭菜单
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [pathname]);
+  // 关闭菜单的函数
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <>
@@ -169,6 +167,7 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={closeMenu}
                   className={`flex items-center px-4 py-3 rounded-xl font-medium
                               transition-all duration-200
                               ${isActive

@@ -1,17 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useSyncExternalStore } from 'react';
 
 // 网站起始日期 - 可根据实际情况修改
 const SITE_START_DATE = new Date('2025-01-01');
 
+// 用于检测客户端挂载状态
+const emptySubscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 export function SiteUptime() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
   const [uptime, setUptime] = useState({ days: 0, hours: 0, minutes: 0 });
 
   useEffect(() => {
-    setMounted(true);
-
     const calculateUptime = () => {
       const now = new Date();
       const diff = now.getTime() - SITE_START_DATE.getTime();

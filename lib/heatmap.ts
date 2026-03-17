@@ -100,14 +100,12 @@ export function getHeatmapStats() {
 
   // 计算活跃天数
   let activeDays = 0;
-  let totalPostsInPeriod = 0;
   let maxPostsInDay = 0;
 
   heatmapData.forEach(week => {
     week.days.forEach(day => {
       if (day.count > 0) {
         activeDays++;
-        totalPostsInPeriod += day.count;
         maxPostsInDay = Math.max(maxPostsInDay, day.count);
       }
     });

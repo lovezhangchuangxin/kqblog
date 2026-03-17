@@ -1,19 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useSyncExternalStore } from 'react';
 
 const STORAGE_KEY = 'kqblog_visitor';
 const TODAY_KEY = 'kqblog_visitor_date';
 
+// 用于检测客户端挂载状态
+const emptySubscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 export function VisitorCounter() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
   const [totalVisits, setTotalVisits] = useState(0);
   const [todayVisits, setTodayVisits] = useState(0);
   const [animated, setAnimated] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-
     const today = new Date().toDateString();
     const storedDate = localStorage.getItem(TODAY_KEY);
     let total = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
@@ -33,13 +36,15 @@ export function VisitorCounter() {
     localStorage.setItem(STORAGE_KEY, String(total));
     localStorage.setItem(`${STORAGE_KEY}_today`, String(todayCount));
 
-    // 动画效果
-    setAnimated(false);
-    setTimeout(() => {
-      setTotalVisits(total);
-      setTodayVisits(todayCount);
-      setAnimated(true);
-    }, 100);
+    // 动画效果 - 使用 queueMicrotask 避免同步 setState
+    queueMicrotask(() => {
+      setAnimated(false);
+      setTimeout(() => {
+        setTotalVisits(total);
+        setTodayVisits(todayCount);
+        setAnimated(true);
+      }, 100);
+    });
   }, []);
 
   return (

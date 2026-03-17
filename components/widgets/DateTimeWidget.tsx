@@ -1,17 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useSyncExternalStore } from 'react';
 
 const WEEKDAYS = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 
+// 用于检测客户端挂载状态
+const emptySubscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 export function DateTimeWidget() {
-  const [mounted, setMounted] = useState(false);
-  const [dateTime, setDateTime] = useState(new Date());
+  const mounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
+  const [dateTime, setDateTime] = useState(() => new Date());
 
   useEffect(() => {
-    setMounted(true);
-    setDateTime(new Date());
-
     const timer = setInterval(() => {
       setDateTime(new Date());
     }, 1000);
