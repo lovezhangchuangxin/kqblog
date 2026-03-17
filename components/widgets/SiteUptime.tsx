@@ -33,36 +33,30 @@ export function SiteUptime() {
   }, []);
 
   return (
-    <div className="p-5 rounded-xl border border-border bg-background hover:border-primary/25 transition-all duration-300">
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
-          <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div className="p-3 rounded-lg border border-border bg-background hover:border-primary/25 transition-colors">
+      <div className="flex items-center gap-2 mb-2">
+        <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center">
+          <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <span className="text-sm font-medium text-muted-foreground">运行时间</span>
+        <span className="text-xs font-medium text-muted-foreground">运行时间</span>
       </div>
-
-      <div className="flex items-center gap-2 text-lg">
-        <span className="font-semibold text-foreground">已运行</span>
-        <div className="flex items-center gap-1">
-          <span className="px-2 py-0.5 rounded bg-primary/10 text-primary font-mono font-bold">
-            {mounted ? uptime.days : '--'}
-          </span>
-          <span className="text-muted-foreground text-sm">天</span>
+      <div className="flex items-center justify-center gap-3">
+        <div className="text-center">
+          <div className="text-lg font-mono font-bold text-primary">{mounted ? uptime.days : '--'}</div>
+          <div className="text-[10px] text-muted-foreground">天</div>
         </div>
-        <div className="flex items-center gap-1">
-          <span className="px-2 py-0.5 rounded bg-primary/10 text-primary font-mono font-bold">
-            {mounted ? uptime.hours : '--'}
-          </span>
-          <span className="text-muted-foreground text-sm">时</span>
+        <span className="text-muted-foreground/50">:</span>
+        <div className="text-center">
+          <div className="text-lg font-mono font-bold text-primary">{mounted ? String(uptime.hours).padStart(2, '0') : '--'}</div>
+          <div className="text-[10px] text-muted-foreground">时</div>
         </div>
-        <div className="flex items-center gap-1">
-          <span className="px-2 py-0.5 rounded bg-primary/10 text-primary font-mono font-bold">
-            {mounted ? uptime.minutes : '--'}
-          </span>
-          <span className="text-muted-foreground text-sm">分</span>
+        <span className="text-muted-foreground/50">:</span>
+        <div className="text-center">
+          <div className="text-lg font-mono font-bold text-primary">{mounted ? String(uptime.minutes).padStart(2, '0') : '--'}</div>
+          <div className="text-[10px] text-muted-foreground">分</div>
         </div>
       </div>
     </div>

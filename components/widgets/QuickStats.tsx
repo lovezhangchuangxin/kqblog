@@ -41,31 +41,31 @@ export function QuickStats() {
   ];
 
   return (
-    <div className="p-5 rounded-xl border border-border bg-background">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
-          <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div className="p-3 rounded-lg border border-border bg-background">
+      <div className="flex items-center gap-2 mb-2">
+        <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center">
+          <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
               d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
           </svg>
         </div>
-        <span className="text-sm font-medium text-muted-foreground">博客统计</span>
+        <span className="text-xs font-medium text-muted-foreground">博客统计</span>
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="space-y-1.5">
         {statItems.map((item) => (
           <div
             key={item.label}
-            className="text-center p-3 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors"
+            className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-secondary/30 hover:bg-secondary/50 transition-colors"
           >
-            <div className={`w-8 h-8 mx-auto mb-2 rounded-lg bg-background flex items-center justify-center ${item.color}`}>
+            <div className={`w-6 h-6 shrink-0 rounded bg-background flex items-center justify-center ${item.color}`}>
               {item.icon}
             </div>
-            <div className={`text-xl font-bold ${item.color} font-mono`}>
+            <div className="flex-1 min-w-0 text-xs text-muted-foreground">{item.label}</div>
+            <div className={`text-sm font-bold ${item.color} font-mono`}>
               {item.value}
-              {item.suffix && <span className="text-sm font-normal text-muted-foreground ml-0.5">{item.suffix}</span>}
+              {item.suffix && <span className="text-xs font-normal text-muted-foreground ml-0.5">{item.suffix}</span>}
             </div>
-            <div className="text-xs text-muted-foreground mt-1">{item.label}</div>
           </div>
         ))}
       </div>
