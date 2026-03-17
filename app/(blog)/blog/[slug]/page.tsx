@@ -69,7 +69,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       <article className="min-h-screen bg-background">
         {/* 文章头部 */}
-        <header className="relative py-12 px-4 overflow-hidden">
+        <header className="relative py-8 px-4 overflow-hidden">
           {/* 装饰背景 */}
           <div
             className="absolute inset-0 pointer-events-none"
@@ -86,7 +86,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <Link
               href="/blog"
               className="inline-flex items-center gap-2 text-muted-foreground
-                         hover:text-primary transition-colors duration-200 mb-8
+                         hover:text-primary transition-colors duration-200 mb-5
                          animate-fade-in-up"
             >
               <svg
@@ -107,14 +107,14 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             {/* 标题 */}
             <h1
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4
                          leading-tight animate-fade-in-up animate-delay-100"
             >
               <span className="text-gradient">{post.frontmatter.title}</span>
             </h1>
 
             {/* 描述 */}
-            <p className="text-lg text-muted-foreground mb-8 animate-fade-in-up animate-delay-200">
+            <p className="text-lg text-muted-foreground mb-5 animate-fade-in-up animate-delay-200">
               {post.frontmatter.description}
             </p>
 
