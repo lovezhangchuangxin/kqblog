@@ -1,5 +1,5 @@
 ---
-name: tech-blog-writer
+name: tech-blog-writing
 description: 生成高质量编程技术博客。适用于 Rust、TypeScript、Go、Python、前端工程、后端架构、并发、语言机制、框架原理等主题。用于从零写作、重写、扩写、提纲生成、技术审稿。
 ---
 
