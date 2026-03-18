@@ -83,29 +83,6 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-
-          {/* 快速导航 */}
-          <section className="mt-8 pt-6 border-t border-border">
-            <h3 className="text-sm font-medium text-muted-foreground mb-4 text-center">快速导航</h3>
-            <div className="grid grid-cols-3 gap-3 max-w-md mx-auto">
-              {[
-                { href: '/about', title: '关于' },
-                { href: '/links', title: '友链' },
-                { href: '/rss.xml', title: 'RSS' },
-              ].map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="py-2.5 px-4 rounded-lg border border-border text-center
-                             text-sm font-medium text-muted-foreground
-                             hover:text-primary hover:border-primary/30 hover:bg-primary/5
-                             transition-all duration-200"
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </div>
-          </section>
         </div>
       </main>
       <Footer />

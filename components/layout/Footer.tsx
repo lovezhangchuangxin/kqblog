@@ -54,38 +54,21 @@ export function Footer() {
 
   return (
     <>
-      <footer className="relative border-t border-border bg-secondary/30">
-        {/* 装饰渐变 */}
-        <div
-          className="absolute inset-x-0 top-0 h-px"
-          style={{
-            background: 'linear-gradient(90deg, transparent, hsl(var(--primary) / 0.3), transparent)',
-          }}
-        />
-
-        <div className="max-w-4xl mx-auto px-4 py-12">
-          <div className="flex flex-col items-center gap-8">
-            {/* Logo */}
-            <Link
-              href="/"
-              className="text-2xl font-bold text-gradient hover:opacity-80 transition-opacity"
-            >
-              KQ Blog
-            </Link>
-
+      <footer className="border-t border-border bg-secondary/30">
+        <div className="max-w-4xl mx-auto px-4 py-6">
+          <div className="flex flex-col items-center gap-4">
             {/* 导航链接 */}
-            <nav className="flex flex-wrap justify-center gap-6 text-sm">
+            <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
               {[
+                { href: '/', label: 'KQ Blog' },
                 { href: '/blog', label: '文章' },
                 { href: '/about', label: '关于' },
                 { href: '/links', label: '友链' },
-                { href: '/rss.xml', label: 'RSS' },
               ].map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-muted-foreground hover:text-primary
-                             transition-colors duration-200 link-underline"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -93,18 +76,14 @@ export function Footer() {
             </nav>
 
             {/* 社交链接 */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center gap-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg flex items-center justify-center
-                             text-muted-foreground hover:text-primary
-                             bg-secondary/50 hover:bg-secondary
-                             border border-border/50 hover:border-primary/30
-                             transition-all duration-300 hover:-translate-y-1"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -113,15 +92,9 @@ export function Footer() {
             </div>
 
             {/* 版权信息 */}
-            <div className="text-center text-sm text-muted-foreground">
-              <p>© {currentYear} KQ Blog. All rights reserved.</p>
-              <p className="mt-2 text-xs">
-                Powered by{' '}
-                <span className="text-primary">Next.js</span>
-                {' '}&{' '}
-                <span className="text-primary">Tailwind CSS</span>
-              </p>
-            </div>
+            <p className="text-xs text-muted-foreground">
+              © {currentYear} KQ Blog. All rights reserved.
+            </p>
           </div>
         </div>
       </footer>
