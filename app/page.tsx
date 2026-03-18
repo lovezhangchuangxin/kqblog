@@ -14,7 +14,7 @@ export const metadata: Metadata = generateSiteMetadata();
 
 export default function HomePage() {
   const posts = getAllPosts();
-  const recentPosts = posts.slice(0, 8);
+  const recentPosts = posts.slice(0, 4);
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -36,7 +36,7 @@ export default function HomePage() {
                 <h2 className="text-xl font-bold text-foreground">
                   <span className="text-gradient">最新文章</span>
                 </h2>
-                {posts.length > 8 && (
+                {posts.length > 4 && (
                   <Link
                     href="/blog"
                     className="group flex items-center gap-1.5 text-primary text-sm font-medium
