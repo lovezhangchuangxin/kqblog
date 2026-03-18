@@ -261,9 +261,12 @@ body {
     background: hsl(var(--background));
     color: hsl(var(--foreground));
     font-family: var(--font-sans, system-ui, sans-serif);
+    line-height: 1.6;
     transition:
         background-color 0.3s ease,
         color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* 代码块样式 */
@@ -379,6 +382,14 @@ a:hover {
 }
 .animate-delay-500 {
     animation-delay: 500ms;
+}
+
+/* 排版优化 */
+.text-balance {
+    text-wrap: balance;
+}
+.text-pretty {
+    text-wrap: pretty;
 }
 
 /* 初始隐藏（配合入场动画使用） */
@@ -530,6 +541,23 @@ html {
 :focus-visible {
     outline: 2px solid hsl(var(--primary));
     outline-offset: 2px;
+}
+
+/* 交互元素指针 */
+.clickable,
+button,
+a,
+[role="button"],
+input[type="submit"],
+input[type="button"] {
+    cursor: pointer;
+}
+
+/* 禁用状态 */
+button:disabled,
+a[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
 /* ============================================

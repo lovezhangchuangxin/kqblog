@@ -39,14 +39,15 @@ export function SiteUptime() {
   }, []);
 
   return (
-    <div className="p-3 rounded-lg border border-border bg-background hover:border-primary/25 transition-colors">
-      <div className="flex items-center gap-2 mb-2">
-        <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center">
+    <div className="p-4 rounded-xl border border-border bg-background hover:border-primary/20 transition-colors duration-200">
+      <div className="flex items-center gap-2 mb-3">
+        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
           <svg
             className="w-4 h-4 text-primary"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -60,23 +61,23 @@ export function SiteUptime() {
           运行时间
         </span>
       </div>
-      <div className="flex items-center justify-center gap-3">
+      <div className="flex items-center justify-center gap-2">
         <div className="text-center">
-          <div className="text-lg font-mono font-bold text-primary">
+          <div className="text-lg font-mono font-bold text-primary tabular-nums">
             {mounted ? uptime.days : "--"}
           </div>
           <div className="text-[10px] text-muted-foreground">天</div>
         </div>
-        <span className="text-muted-foreground/50">:</span>
+        <span className="text-muted-foreground/40 text-sm">:</span>
         <div className="text-center">
-          <div className="text-lg font-mono font-bold text-primary">
+          <div className="text-lg font-mono font-bold text-primary tabular-nums">
             {mounted ? String(uptime.hours).padStart(2, "0") : "--"}
           </div>
           <div className="text-[10px] text-muted-foreground">时</div>
         </div>
-        <span className="text-muted-foreground/50">:</span>
+        <span className="text-muted-foreground/40 text-sm">:</span>
         <div className="text-center">
-          <div className="text-lg font-mono font-bold text-primary">
+          <div className="text-lg font-mono font-bold text-primary tabular-nums">
             {mounted ? String(uptime.minutes).padStart(2, "0") : "--"}
           </div>
           <div className="text-[10px] text-muted-foreground">分</div>

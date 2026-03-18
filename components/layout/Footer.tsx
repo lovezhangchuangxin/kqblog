@@ -54,11 +54,11 @@ export function Footer() {
 
   return (
     <>
-      <footer className="border-t border-border bg-secondary/30">
-        <div className="max-w-4xl mx-auto px-4 py-6">
-          <div className="flex flex-col items-center gap-4">
+      <footer className="border-t border-border bg-secondary/20 mt-auto">
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="flex flex-col items-center gap-5">
             {/* 导航链接 */}
-            <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+            <nav className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm" aria-label="页脚导航">
               {[
                 { href: '/', label: 'KQ Blog' },
                 { href: '/blog', label: '文章' },
@@ -68,7 +68,8 @@ export function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200
+                             focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
                 >
                   {link.label}
                 </Link>
@@ -76,14 +77,15 @@ export function Footer() {
             </nav>
 
             {/* 社交链接 */}
-            <div className="flex items-center justify-center gap-4">
+            <div className="flex items-center justify-center gap-5">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200
+                             focus-visible:ring-2 focus-visible:ring-primary/50 rounded p-1"
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -92,7 +94,7 @@ export function Footer() {
             </div>
 
             {/* 版权信息 */}
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground/70">
               © {currentYear} KQ Blog. All rights reserved.
             </p>
           </div>
@@ -102,18 +104,19 @@ export function Footer() {
       {/* 返回顶部按钮 */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 w-12 h-12 rounded-xl
-                    bg-primary text-white shadow-lg shadow-primary/25
+        className={`fixed bottom-6 right-6 w-11 h-11 rounded-xl
+                    bg-primary text-white shadow-lg shadow-primary/20
                     flex items-center justify-center
-                    transition-all duration-300 z-50
-                    hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-1
+                    transition-all duration-200 z-50
+                    hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5
+                    focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2
                     ${showBackToTop
                       ? 'opacity-100 translate-y-0'
                       : 'opacity-0 translate-y-4 pointer-events-none'
                     }`}
         aria-label="返回顶部"
       >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
       </button>

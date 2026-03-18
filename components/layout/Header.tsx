@@ -55,13 +55,14 @@ export function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="group relative text-lg md:text-xl font-bold text-foreground
-                         hover:text-primary transition-colors duration-300"
+              className="group relative text-lg md:text-xl font-bold text-foreground tracking-tight
+                         hover:text-primary transition-colors duration-200"
+              aria-label="返回首页"
             >
               <span className="relative z-10">KQ Blog</span>
               <span
                 className="absolute -inset-2 rounded-lg opacity-0 group-hover:opacity-100
-                           transition-opacity duration-300 -z-10"
+                           transition-opacity duration-200 -z-10"
                 style={{
                   background: 'radial-gradient(ellipse at center, hsl(var(--primary) / 0.1), transparent 70%)',
                 }}
@@ -69,7 +70,7 @@ export function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-0.5">
+            <nav className="hidden md:flex items-center gap-1" aria-label="主导航">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href ||
                   (link.href !== '/' && pathname.startsWith(link.href));
@@ -79,30 +80,25 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     className={`relative px-4 py-2 rounded-lg font-medium text-sm
-                                transition-all duration-300
+                                transition-all duration-200
+                                focus-visible:ring-2 focus-visible:ring-primary/50
                                 ${isActive
-                                  ? 'text-primary'
-                                  : 'text-muted-foreground hover:text-foreground'
+                                  ? 'text-primary bg-primary/5'
+                                  : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
                                 }`}
+                    aria-current={isActive ? 'page' : undefined}
                   >
                     {link.label}
                     {isActive && (
                       <span
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5
+                        className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-5 h-0.5
                                    bg-primary rounded-full"
                       />
                     )}
-                    <span
-                      className="absolute inset-0 rounded-lg opacity-0 hover:opacity-100
-                                 transition-opacity duration-200 -z-10"
-                      style={{
-                        background: 'hsl(var(--secondary))',
-                      }}
-                    />
                   </Link>
                 );
               })}
-              <div className="ml-1">
+              <div className="ml-2">
                 <ThemeSwitcher />
               </div>
             </nav>
@@ -112,10 +108,12 @@ export function Header() {
               <ThemeSwitcher />
               <button
                 onClick={() => setIsMenuOpen(true)}
-                className="relative w-9 h-9 flex items-center justify-center
+                className="w-10 h-10 flex items-center justify-center
                            rounded-lg text-foreground hover:bg-secondary
-                           transition-colors duration-200"
+                           transition-colors duration-200
+                           focus-visible:ring-2 focus-visible:ring-primary/50"
                 aria-label="打开菜单"
+                aria-expanded={isMenuOpen}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -158,7 +156,7 @@ export function Header() {
             </button>
           </div>
 
-          <nav className="p-3 space-y-1">
+          <nav className="p-3 space-y-1" aria-label="移动端导航">
             {navLinks.map((link, index) => {
               const isActive = pathname === link.href ||
                 (link.href !== '/' && pathname.startsWith(link.href));
@@ -170,6 +168,7 @@ export function Header() {
                   onClick={closeMenu}
                   className={`flex items-center px-4 py-3 rounded-xl font-medium
                               transition-all duration-200
+                              focus-visible:ring-2 focus-visible:ring-primary/50
                               ${isActive
                                 ? 'text-primary bg-primary/10'
                                 : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
@@ -178,10 +177,11 @@ export function Header() {
                   style={{
                     animationDelay: isMenuOpen ? `${index * 50}ms` : '0ms',
                   }}
+                  aria-current={isActive ? 'page' : undefined}
                 >
                   {link.label}
                   {isActive && (
-                    <span className="ml-auto w-1.5 h-1.5 rounded-full bg-primary" />
+                    <span className="ml-auto w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true" />
                   )}
                 </Link>
               );
