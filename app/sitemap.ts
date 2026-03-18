@@ -1,7 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllPosts } from '@/lib/content';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://kqblog.dev';
+import { SITE_URL } from '@/lib/config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();

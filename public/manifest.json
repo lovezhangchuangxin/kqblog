@@ -1,0 +1,19 @@
+{
+  "name": "KQ Blog",
+  "short_name": "KQ Blog",
+  "description": "一个基于 Next.js 构建的个人博客，分享技术、生活与思考",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["blog", "technology"],
+  "lang": "zh-CN"
+}

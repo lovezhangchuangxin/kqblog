@@ -1,8 +1,5 @@
 import { Metadata } from 'next';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://kqblog.dev';
-const SITE_NAME = 'KQ Blog';
-const DEFAULT_OG_IMAGE = '/images/og-default.png';
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE } from './config';
 
 interface PostMetadataInput {
   title: string;
@@ -56,22 +53,24 @@ interface JsonLdInput {
   slug: string;
   author?: string;
   cover?: string;
+  modifiedDate?: string;
 }
 
 /**
  * 生成文章的结构化数据 (JSON-LD)
  */
 export function generateJsonLd(input: JsonLdInput) {
-  const { title, description, date, slug, author, cover } = input;
+  const { title, description, date, slug, author, cover, modifiedDate } = input;
   const url = `${SITE_URL}/blog/${slug}`;
   const imageUrl = cover ? `${SITE_URL}${cover}` : `${SITE_URL}${DEFAULT_OG_IMAGE}`;
 
-  return {
+  const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: title,
     description,
     datePublished: date,
+    dateModified: modifiedDate || date,
     author: {
       '@type': 'Person',
       name: author || 'KQ',
@@ -83,7 +82,7 @@ export function generateJsonLd(input: JsonLdInput) {
       url: SITE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/images/logo.png`,
+        url: `${SITE_URL}/images/logo.svg`,
       },
     },
     image: imageUrl,
@@ -91,6 +90,54 @@ export function generateJsonLd(input: JsonLdInput) {
       '@type': 'WebPage',
       '@id': url,
     },
+  };
+
+  return jsonLd;
+}
+
+/**
+ * 生成网站的结构化数据 (JSON-LD)
+ */
+export function generateWebsiteJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: SITE_DESCRIPTION,
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/images/logo.svg`,
+      },
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/blog?search={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}
+
+/**
+ * 生成面包屑的结构化数据 (JSON-LD)
+ */
+export function generateBreadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
   };
 }
 
@@ -103,7 +150,7 @@ export function generateSiteMetadata(): Metadata {
       default: SITE_NAME,
       template: `%s | ${SITE_NAME}`,
     },
-    description: '一个基于 Next.js 构建的个人博客，分享技术、生活与思考',
+    description: SITE_DESCRIPTION,
     metadataBase: new URL(SITE_URL),
     openGraph: {
       siteName: SITE_NAME,

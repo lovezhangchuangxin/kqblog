@@ -1,9 +1,6 @@
 import { getAllPosts } from '@/lib/content';
 import { NextResponse } from 'next/server';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://kqblog.dev';
-const SITE_NAME = 'KQ Blog';
-const SITE_DESCRIPTION = '一个基于 Next.js 构建的个人博客，分享技术、生活与思考';
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from '@/lib/config';
 
 export async function GET() {
   const posts = getAllPosts();
