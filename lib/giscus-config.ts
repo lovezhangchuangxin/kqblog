@@ -1,24 +1,23 @@
 import type { Theme } from '@giscus/react';
 
 // Giscus 配置
-// 请将以下值替换为您的 GitHub 仓库信息
 export const giscusConfig = {
   // GitHub 仓库，格式：owner/repo
-  repo: 'your-username/your-blog-repo' as const,
-  // 仓库 ID（从 giscus.app 获取）
-  repoId: '' as const,
+  repo: 'lovezhangchuangxin/kqblog' as const,
+  // 仓库 ID
+  repoId: 'R_kgDORpZyFQ' as const,
   // Discussion 分类
   category: 'Announcements' as const,
-  // 分类 ID（从 giscus.app 获取）
-  categoryId: '' as const,
+  // 分类 ID
+  categoryId: 'DIC_kwDORpZyFc4C4pdv' as const,
   // 映射方式：pathname | url | title | og:title | specific | number
-  mapping: 'pathname' as const,
-  // 评论输入框上方显示的术语
+  mapping: 'title' as const,
+  // 评论输入框上方显示的术语（使用 title 映射时，term 会是文章标题）
   term: '欢迎评论' as const,
   // 反应（表情）功能
   reactionsEnabled: true,
   // 元数据加载
-  emitMetadata: true,
+  emitMetadata: false,
   // 评论框位置：top | bottom
   inputPosition: 'top' as const,
   // 语言
@@ -47,9 +46,6 @@ export function getGiscusTheme(blogTheme: string): Theme {
 
 // 检查 Giscus 是否已配置
 export function isGiscusConfigured(): boolean {
-  return (
-    giscusConfig.repo !== 'your-username/your-blog-repo' &&
-    giscusConfig.repoId !== '' &&
-    giscusConfig.categoryId !== ''
-  );
+  // 配置已完成
+  return true;
 }
