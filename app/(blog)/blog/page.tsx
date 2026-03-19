@@ -41,7 +41,7 @@ export default function BlogPage() {
           <div className="text-center py-20 animate-fade-in">
             <div
               className="w-24 h-24 mx-auto mb-6 rounded-2xl
-                            bg-gradient-to-br from-primary/10 to-accent/10
+                            bg-linear-to-br from-primary/10 to-accent/10
                             flex items-center justify-center"
             >
               <svg

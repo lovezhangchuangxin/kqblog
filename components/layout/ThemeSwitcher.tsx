@@ -1,7 +1,13 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useSyncExternalStore, useCallback, useState, useRef, useEffect } from "react";
+import {
+  useSyncExternalStore,
+  useCallback,
+  useState,
+  useRef,
+  useEffect,
+} from "react";
 
 const themes = [
   { name: "zidian", label: "紫电 · 刻晴" },
@@ -12,7 +18,7 @@ function useMounted() {
   return useSyncExternalStore(
     useCallback(() => () => {}, []),
     () => true,
-    () => false
+    () => false,
   );
 }
 
@@ -25,7 +31,10 @@ export function ThemeSwitcher() {
   // 点击外部关闭下拉框
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -34,9 +43,7 @@ export function ThemeSwitcher() {
   }, []);
 
   if (!mounted) {
-    return (
-      <div className="w-16 h-9 rounded-lg bg-secondary animate-pulse" />
-    );
+    return <div className="w-16 h-9 rounded-lg bg-secondary animate-pulse" />;
   }
 
   return (
@@ -62,14 +69,19 @@ export function ThemeSwitcher() {
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </button>
 
       {/* 下拉选项 */}
       {isOpen && (
         <div
-          className="absolute right-0 mt-2 py-1 min-w-[120px]
+          className="absolute right-0 mt-2 py-1 min-w-30
                      bg-background/95 backdrop-blur-sm
                      border border-border rounded-lg shadow-lg
                      animate-in fade-in-0 zoom-in-95 duration-150"

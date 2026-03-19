@@ -89,7 +89,7 @@ export function code({ children, className }: CodeProps) {
   const isInline = !className;
   if (isInline) {
     return (
-      <code className="px-1.5 py-0.5 rounded bg-[hsl(var(--code-bg))] text-primary font-mono text-sm">
+      <code className="px-1.5 py-0.5 rounded bg-code-bg text-primary font-mono text-sm">
         {children}
       </code>
     );

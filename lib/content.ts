@@ -179,7 +179,7 @@ function countWords(text: string): number {
     .replace(/!\[([^\]]*)\]\([^)]+\)/g, "") // 移除图片
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // 保留链接文本
     .replace(/^#{1,6}\s+/gm, "") // 移除标题标记
-    .replace(/[#*\[\]!]/g, "") // 移除其他 markdown 符号
+    .replace(/[#*[\]!]/g, "") // 移除其他 markdown 符号
     .replace(/\s+/g, " ")
     .trim();
 
@@ -199,7 +199,7 @@ function countWords(text: string): number {
 function generateExcerpt(content: string, length = 160): string {
   const plainText = content
     .replace(/^---[\s\S]*?---/, "") // 移除 frontmatter
-    .replace(/[#*`\[\]!]/g, "") // 移除 markdown 符号
+    .replace(/[#*`[\]!]/g, "") // 移除 markdown 符号
     .replace(/\n+/g, " ") // 换行转空格
     .trim();
   return plainText.length > length
